@@ -1179,12 +1179,12 @@ __metadata:
 
 "anchor-bankrun@file:./libs/anchor-bankrun::locator=root-workspace-0b6124%40workspace%3A.":
   version: 0.5.0
-  resolution: "anchor-bankrun@file:./libs/anchor-bankrun#./libs/anchor-bankrun::hash=eaef11&locator=root-workspace-0b6124%40workspace%3A."
+  resolution: "anchor-bankrun@file:./libs/anchor-bankrun#./libs/anchor-bankrun::hash=7c7af0&locator=root-workspace-0b6124%40workspace%3A."
   peerDependencies:
     "@coral-xyz/anchor": ^0.31.0
     "@solana/web3.js": ">1.92.0"
     solana-bankrun: ">=0.2.0 <0.5.0"
-  checksum: 10c0/8e7b91c74e8cacfef6af8919f5cae9bf2248d7f80a1ec5e6101a5fde8e83d6a98ca180a86d704837e2f4b5dc5e85178bec359283ac5caedb8e68cc37977a81d6
+  checksum: 10c0/894f2459165b5f23ff74ed172e3ee842329005d2eef93ebd7a3579b26c71ac667099169b8eebce298998fd1a6f50600cad93151342e76aa843a34167195a75a2
   languageName: node
   linkType: hard
 
