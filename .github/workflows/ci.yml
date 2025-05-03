@@ -18,7 +18,7 @@ jobs:
       - name: Install Anchor CLI
         uses: metaDAOproject/setup-anchor@v1
         with:
-          solana-cli-version: "2.2.14"
+          solana-cli-version: "beta"
           node-version: "23.11.0"
           anchor-version: "0.31.1"
         
