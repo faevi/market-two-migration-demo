@@ -101,3 +101,40 @@ test("migrate market two realloc new field flash swap fee bps", async () => {
 
   expect(market_two_info_migrated?.data.length).equal(marketTwoInfo.data.length + U32TYPE_SIZE, "wrong size marketTwo");
 });
+
+test("field migration test", async () => {
+  const marketTwoInfo = await connection.getAccountInfo(MARKET_TWO_KEY);
+
+  const context = await getBankrunContext();
+
+  const provider = new BankrunProvider(context);
+  const program = new Program<MarketMigrationTask>(MarketMigrationTaskIdl, provider);
+  const parsedMarketTwoDecoded = program.coder.accounts.decode("marketTwo", marketTwoInfo.data);
+
+  await program.methods
+    .migrateMarketTwoFlashFeeBps()
+    .accountsStrict({
+      admin: adminKeypair.publicKey,
+      marketTwo: MARKET_TWO_KEY,
+      rent: web3.SYSVAR_RENT_PUBKEY,
+      systemProgram: SystemProgram.programId,
+    })
+    .signers([adminKeypair])
+    .rpc().catch((e) => {
+      console.log("Error: ", e);
+    });
+
+
+
+  // Compare the old and new data
+  const parsedMarketTwoMigratedDecoded = await program.account.marketTwo.fetch(MARKET_TWO_KEY);
+
+  // instead of .equal(…)
+  expect(parsedMarketTwoMigratedDecoded)
+    .to.deep.equal({
+      ...parsedMarketTwoDecoded,
+      flashSwapFeeBps: DEFAULT_FLASH_SWAP_FEE_BPS,
+    }, "old data should be equal to prev data");
+  // Check the new field
+});
+

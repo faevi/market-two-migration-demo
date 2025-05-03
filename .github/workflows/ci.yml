@@ -2,38 +2,37 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [master]
   pull_request:
-    branches: [ main ]
+    branches: [master]
 
 jobs:
   migration-test:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
 
-    - name: Setup Rust, Solana & Node.js
-      uses: superrefactor/actions-setup-solana@v1
-      with:
-        solana-version: "2.2.12"
-        rust-version: "1.88.0-nightly"
-        node-version: "23.11.0"
+       # 6) Install Anchor CLI via composite action
+      - name: Install Anchor CLI
+        uses: metaDAOproject/setup-anchor@v1
+        with:
+          solana-cli-version: "1.18.15"
+          node-version: "23.11.0"
+          anchor-version: "0.31.1"
+        
+      - name: Install deps
+        run: yarn install --frozen-lockfile
 
-    - name: Build anchor-bankrun fork
-      run: |
-        yarn install
-        yarn build-anchor-bankrun
-        yarn install
+      - name: Build program (simple)
+        run: yarn build-simple-test
 
-    - name: Build program (simple)
-      run: yarn build-simple-test
+      - name: Run simple tests
+        run: yarn test --skip-lint
 
-    - name: Run simple tests
-      run: yarn test --skip-lint
+      - name: Build program (migration)
+        run: yarn build-migration
 
-    - name: Build program (migration)
-      run: yarn build-migration
-
-    - name: Run migration tests
-      run:  yarn test --skip-lint
+      - name: Run migration tests
+        run: yarn test --skip-lint
