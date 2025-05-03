@@ -9,10 +9,6 @@ on:
 jobs:
   migration-test:
     runs-on: ubuntu-latest
-    env:
-      SOLANA_VERSION: "2.2.14"
-      ANCHOR_VERSION: "0.31.1"
-      NODE_VERSION: "23.11.0"
 
     steps:
       - uses: actions/checkout@v4
@@ -22,7 +18,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: $NODE_VERSION
+          node-version: "23.11.0"
 
       - name: Enable Corepack and set Yarn version
         run: |
@@ -35,11 +31,11 @@ jobs:
           path: |
             ~/.cache/solana/
             ~/.local/share/solana/
-          key: solana-cli-${{ runner.os }}-build-$SOLANA_VERSION
+          key: solana-cli-${{ runner.os }}-build-$2.2.14
       - name: Install Solana CLI tools
         # Use the old solana.com release if the version starts with 1, Anza otherwise
         run: |
-          sh -c "$(curl -sSfL https://release.anza.xyz/v$SOLANA_VERSION/install)"
+          sh -c "$(curl -sSfL https://release.anza.xyz/v2.2.14/install)"
         shell: bash
       - name: Update PATH
         run: echo "/home/runner/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
@@ -47,7 +43,7 @@ jobs:
         # 4) Install Anchor CLI (latest)
 
       - name: Install Anchor CLI
-        run: npm i -g @coral-xyz/anchor-cli@$ANCHOR_VERSION
+        run: npm i -g @coral-xyz/anchor-cli@0.31.1
         shell: bash
 
       - name: Build program (simple)
