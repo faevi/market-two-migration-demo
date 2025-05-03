@@ -33,7 +33,7 @@ jobs:
       # 3) Install Anchor CLI (latest)
       - name: Install Anchor CLI
         run: |
-          cargo install --locked anchor-cli
+          cargo install --locked anchor-cli --version 0.31.0
           echo "$HOME/.cargo/bin" >> $GITHUB_PATH
 
       - name: Install dependencies
