@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  migration-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup Rust, Solana & Node.js
+      uses: superrefactor/actions-setup-solana@v1
+      with:
+        solana-version: "2.2.12"
+        rust-version: "1.88.0-nightly"
+        node-version: "23.11.0"
+
+    - name: Build anchor-bankrun fork
+      run: |
+        yarn install
+        yarn build-anchor-bankrun
+        yarn install
+
+    - name: Build program (simple)
+      run: yarn build-simple-test
+
+    - name: Run simple tests
+      run: yarn test --skip-lint
+
+    - name: Build program (migration)
+      run: yarn build-migration
+
+    - name: Run migration tests
+      run:  yarn test --skip-lint
