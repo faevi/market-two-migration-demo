@@ -6,7 +6,7 @@ A concise test assignment showing how to add a `flash_swap_fee_bps: u32` field t
 
 ## 🔧 Setup
 
-Install and build the custom fork of [`anchor-bankrun`](https://github.com/IaroslavMazur/anchor-bankrun/tree/iaro/update-anchor):
+Install and build the custom fork of [`anchor-bankrun`](https://github.com/IaroslavMazur/anchor-bankrun/tree/iaro/update-anchor): (latest deps anchor 0.30)
 
 ```bash
 yarn build:anchor-bankrun
