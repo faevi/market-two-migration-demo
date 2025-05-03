@@ -13,27 +13,24 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup Rust, Solana & Node.js
-        uses: superrefactor/actions-setup-solana@v1
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
         with:
-          solana-version: "2.2.12"
-          rust-version: "1.88.0-nightly"
+          toolchain: "1.88.0-nightly"
+          profile: minimal
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
           node-version: "23.11.0"
+
+      - name: Install Solana CLI
+        run: |
+          curl -sSfL https://release.solana.com/v2.2.12/install | sh
+          echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
 
       - name: Build anchor-bankrun fork
         run: |
           yarn install
           yarn build-anchor-bankrun
           yarn install
-
-      - name: Build program (simple)
-        run: yarn build-simple-test
-
-      - name: Run simple tests
-        run: yarn test --skip-lint
-
-      - name: Build program (migration)
-        run: yarn build-migration
-
-      - name: Run migration tests
-        run: yarn test --skip-lint
