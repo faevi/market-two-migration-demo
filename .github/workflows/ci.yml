@@ -43,7 +43,8 @@ jobs:
         # 4) Install Anchor CLI (latest)
 
       - name: Install Anchor CLI
-        run: cargo install --git https://github.com/coral-xyz/anchor avm --force
+        run: | 
+          cargo install --git https://github.com/coral-xyz/anchor avm --force
           avm --version
           avm install 0.31.1
           avm use 0.31.1
