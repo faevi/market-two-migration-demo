@@ -11,14 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-
-      # Set up Rust
-      - name: Set up Rust
-        uses: actions/setup-rust@v1
-        with:
-          rust-version: 1.88.0-nightly
-          override: true
+      - uses: actions/checkout@v4
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
 
       # 2) Node.js 23.11.0
       - name: Set up Node.js
