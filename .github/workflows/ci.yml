@@ -20,6 +20,11 @@ jobs:
         with:
           node-version: 23.11.0
 
+      - name: Enable Corepack and set Yarn version
+        run: |
+          corepack enable
+          corepack prepare yarn@4.9.1 --activate
+
       # 3) Solana CLI 2.2.12
       - name: Install Solana CLI
         run: |
