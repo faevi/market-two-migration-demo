@@ -13,17 +13,20 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+       # 1) Rust (nightly 1.88.0)
       - name: Set up Rust
-        uses: actions-rs/toolchain@v1
+        uses: actions/setup-rust@v1
         with:
-          toolchain: "1.88.0-nightly"
-          profile: minimal
+          rust-version: 1.88.0-nightly
+          override: true
 
+      # 2) Node.js 23.11.0
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "23.11.0"
+          node-version: 23.11.0
 
+      # 3) Solana CLI 2.2.12
       - name: Install Solana CLI
         run: |
           curl -sSfL https://release.solana.com/v2.2.12/install | sh
