@@ -30,7 +30,10 @@ jobs:
         run: |
           curl -sSfL https://release.solana.com/v2.2.12/install | sh
           echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
-          
+
+      - name: Install dependencies
+        run: yarn install
+
       - name: Build program (simple)
         run: yarn build-simple-test
 

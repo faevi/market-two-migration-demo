@@ -1177,16 +1177,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"anchor-bankrun@file:./libs/anchor-bankrun::locator=root-workspace-0b6124%40workspace%3A.":
-  version: 0.5.0
-  resolution: "anchor-bankrun@file:./libs/anchor-bankrun#./libs/anchor-bankrun::hash=7c7af0&locator=root-workspace-0b6124%40workspace%3A."
-  peerDependencies:
-    "@coral-xyz/anchor": ^0.31.0
-    "@solana/web3.js": ">1.92.0"
-    solana-bankrun: ">=0.2.0 <0.5.0"
-  checksum: 10c0/894f2459165b5f23ff74ed172e3ee842329005d2eef93ebd7a3579b26c71ac667099169b8eebce298998fd1a6f50600cad93151342e76aa843a34167195a75a2
+"anchor-bankrun@link:./libs/anchor-bankrun::locator=root-workspace-0b6124%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "anchor-bankrun@link:./libs/anchor-bankrun::locator=root-workspace-0b6124%40workspace%3A."
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "ansi-colors@npm:4.1.1":
   version: 4.1.1
@@ -3982,7 +3977,7 @@ __metadata:
     "@types/chai": "npm:^4.3.0"
     "@types/jest": "npm:^29.5.14"
     "@types/mocha": "npm:^9.0.0"
-    anchor-bankrun: "file:./libs/anchor-bankrun"
+    anchor-bankrun: "link:./libs/anchor-bankrun"
     chai: "npm:^4.3.4"
     dotenv: "npm:^16.5.0"
     jest: "npm:^29.7.0"
