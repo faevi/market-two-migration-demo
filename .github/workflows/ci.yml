@@ -30,6 +30,11 @@ jobs:
         run: |
           curl -sSfL https://release.solana.com/v2.2.12/install | sh
           echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
+      # 3) Install Anchor CLI (latest)
+      - name: Install Anchor CLI
+        run: |
+          cargo install --locked anchor-cli
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
 
       - name: Install dependencies
         run: yarn install
