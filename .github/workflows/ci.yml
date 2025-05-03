@@ -43,7 +43,7 @@ jobs:
         # 4) Install Anchor CLI (latest)
 
       - name: Install Anchor CLI
-        run: yarn add -g @coral-xyz/anchor-cli@0.31.1
+        run: yarn add @coral-xyz/anchor-cli@0.31.1
         shell: bash
 
       - name: Install deps
