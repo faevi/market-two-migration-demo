@@ -14,43 +14,14 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions-rust-lang/setup-rust-toolchain@v1
 
-      # 2) Node.js 23.11.0
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "23.11.0"
-
-      - name: Enable Corepack and set Yarn version
-        run: |
-          corepack enable
-          corepack prepare yarn@4.9.1 --activate
-
-      - name: Cache Solana CLI tools
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cache/solana/
-            ~/.local/share/solana/
-          key: solana-cli-${{ runner.os }}-build-$2.2.14
-      - name: Install Solana CLI tools
-        # Use the old solana.com release if the version starts with 1, Anza otherwise
-        run: |
-          sh -c "$(curl -sSfL https://release.anza.xyz/v2.2.14/install)"
-        shell: bash
-      - name: Update PATH
-        run: echo "/home/runner/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
-        shell: bash
-        # 4) Install Anchor CLI (latest)
-
+       # 6) Install Anchor CLI via composite action
       - name: Install Anchor CLI
-        run: | 
-          cargo install --git https://github.com/coral-xyz/anchor avm --force
-          avm --version
-          avm install 0.31.1
-          avm use 0.31.1
-          anchor --version
-        shell: bash
-
+        uses: metaDAOproject/setup-anchor@v1
+        with:
+          solana-cli-version: "2.2.14"
+          node-version: "23.11.0"
+          anchor-version: "0.31.1"
+        
       - name: Install deps
         run: yarn install --frozen-lockfile
 
